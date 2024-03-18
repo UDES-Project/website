@@ -17,6 +17,7 @@ RUN pnpm run build
 #RUN rm -rf /app/apps/back
 
 ENV NODE_ENV production
+ENV NEXT_PUBLIC_API_HOST umes.ddns.net
 
 RUN corepack enable pnpm 
 
