@@ -52,7 +52,6 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@adonisjs/auth": "^9.1.1",
     "@adonisjs/core": "^6.2.2",
     "@adonisjs/cors": "^2.2.1",
     "@adonisjs/lucid": "^20.1.0",
@@ -60,8 +59,8 @@
     "luxon": "^3.4.4",
     "mysql2": "^3.9.2",
     "reflect-metadata": "^0.2.1",
-    "ws": "^8.16.0",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "ws": "^8.16.0"
   },
   "eslintConfig": {
     "extends": "@adonisjs/eslint-config/app"
