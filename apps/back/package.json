@@ -60,7 +60,8 @@
     "luxon": "^3.4.4",
     "mysql2": "^3.9.2",
     "reflect-metadata": "^0.2.1",
-    "ws": "^8.16.0"
+    "ws": "^8.16.0",
+    "ts-node": "^10.9.1"
   },
   "eslintConfig": {
     "extends": "@adonisjs/eslint-config/app"
