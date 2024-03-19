@@ -17,7 +17,7 @@ function Message({ username, content }: { username: string, content: string }) {
 
 export default function Chat({ groupCode, username }: { groupCode: string, username: string }) {
 
-    const wsInstance = useMemo(() => new WebSocket("ws://" + API_HOST), []);
+    const wsInstance = useMemo(() => new WebSocket("ws://" + API_HOST + "/ws"), []);
     const [messages, setMessages] = useState<Message[]>([])
     const [messageBuffer, setMessageBuffer] = useState<string>("")
 
