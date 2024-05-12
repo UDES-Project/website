@@ -1,0 +1,103 @@
+.chat {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 78px) !important;
+}
+.chat .nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #EEE;
+  width: 100%;
+  padding: 20px;
+  gap: 20px;
+}
+.chat .nav .info {
+  display: flex;
+  align-items: center;
+}
+.chat .nav .info img {
+  height: 32px;
+  margin-right: 5px;
+}
+.chat .nav .sep {
+  height: 100%;
+  width: 1px;
+  background-color: #EEE;
+}
+.chat .messages-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  padding-bottom: 20px;
+}
+.chat .messages-container #messages {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding-inline: 20%;
+}
+.chat .messages-container #messages .system-message-container {
+  width: 100%;
+}
+.chat .messages-container #messages .system-message-container .content {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.chat .messages-container #messages .system-message-container .content.error-true {
+  color: red;
+}
+.chat .messages-container #messages .system-message-container .content.error-false {
+  color: #444;
+}
+.chat .messages-container #messages .message-container {
+  width: 100%;
+}
+.chat .messages-container #messages .message-container .message {
+  width: -moz-fit-content;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+.chat .messages-container #messages .message-container .message.is-me-true {
+  text-align: right;
+  margin-left: auto;
+}
+.chat .messages-container #messages .message-container .message.is-me-true .content {
+  background-color: rgb(11, 135, 32);
+  color: #FFF;
+  border: 0;
+}
+.chat .messages-container #messages .message-container .message .username {
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+.chat .messages-container #messages .message-container .message .content {
+  padding: 7px;
+  border-radius: 5px;
+  border: 1px solid #DDD;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.chat .messages-container .input-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 40px;
+  padding-inline: 20%;
+}
+.chat .messages-container .input-box input {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #DDD;
+  border-radius: 5px;
+}/*# sourceMappingURL=room.css.map */

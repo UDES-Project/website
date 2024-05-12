@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ style_src }}">
+<script src="{{ script_src }}" defer></script>
+{% endblock %}
+
+{% block content %}
+<div class="little-header header nav-height"></div>
+<div class="content-block">
+    <h2>Chat</h2>
+    <form class="chat-form" onsubmit="submitChatForm(event)">
+        <div class="input-wrapper">
+            <img src="/static/assets/icons/room.png" alt="">
+            <input id="input-room_id" type="text" placeholder="Room ID">
+            <button type="button" class="random" onclick="randomRoomID()">
+                <img src="/static/assets/icons/random.png" alt="">
+            </button>
+        </div>
+        <div class="input-wrapper">
+            <img src="/static/assets/icons/username.png" alt="">
+            <input id="input-username" type="text" placeholder="Username">
+        </div>
+        <button class="button green">Join</button>
+    </form>
+</div>
+{% endblock %}

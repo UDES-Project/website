@@ -4,14 +4,17 @@
 <link rel="stylesheet" href="{{ style_src }}">
 {% endblock %}
 
-{% block content %}
-<div class="little-header header">
+{% block header %}
+<header class="little-header">
     <div class="block text">
         <h1>EXTENSIONS</h1>
         <span>Voici la liste officiels des extensions</span>
     </div>
     <div class="block image"></div>
-</div>
+</header>
+{% endblock %}
+
+{% block content %}
 <div class="content-block">
     <h2>Official List</h2>
     <div class="extensions">

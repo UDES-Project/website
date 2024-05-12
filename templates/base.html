@@ -9,15 +9,19 @@
 </head>
 <body>
     <nav>
-        <div class="block">
-            <img src="/static/assets/logo-white.png">
+        <div class="bar">
+            <div class="block">
+                <a href="/">
+                    <img src="/static/assets/logo-white.png">
+                </a>
+            </div>
+            <div class="block">
+                <a href="/">Home</a>
+                <a href="/chat">Chat</a>
+                <a class="button" href="/extensions">Download</a>
+            </div>
         </div>
-        <div class="block">
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
-            <a class="button" href="/extensions">Download</a>
-        </div>
+        {% block header %}{% endblock %}
     </nav>
     {% block content %}{% endblock %}
 </body>
