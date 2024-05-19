@@ -42,7 +42,7 @@ function systemMessage(content, error = false) {
 }
 
 function wsHandler() {
-    ws = new WebSocket(location.protocol.replace("http", "ws") + '//' + window.location.host + '/chat')
+    ws = new WebSocket(location.protocol.replace("http", "ws") + '//' + window.location.host + '/ws/chat')
 
     ws.onopen = () => {
         ws.send(JSON.stringify({
