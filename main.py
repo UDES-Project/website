@@ -8,7 +8,7 @@ app = App(__name__)
 sock = Sock(app.flask)
 
 @sock.route('/ws/chat')
-def chat(ws):
+def ws_chat(ws):
     
     handler = WsHandler(ws)
     
