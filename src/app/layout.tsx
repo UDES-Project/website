@@ -1,4 +1,6 @@
+import NavBar from "@/components/navbar/navbar";
 import "./globals.scss";
+import Footer from "@/components/footer/footer";
 
 export default function RootLayout({
     children,
@@ -8,21 +10,11 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                <nav>
-                    <div className="bar">
-                        <div className="block">
-                            <a href="/">
-                                <img src="/static/assets/logo-white.png" />
-                            </a>
-                        </div>
-                        <div className="block">
-                            <a href="/">Home</a>
-                            <a href="/chat">Chat</a>
-                            <a className="button" href="/extensions">Download</a>
-                        </div>
-                    </div>
-                </nav>
-                {children}
+                <NavBar/>
+                <main>
+                    {children}
+                </main>
+                <Footer/>
             </body>
         </html>
     );

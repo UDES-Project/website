@@ -1,17 +1,17 @@
 "use client";
 
 import "./page.scss";
-import { error } from "console"
 import { use, useEffect, useRef, useState } from "react"
 
 export default function Page() {
     const chatInputRef = useRef<HTMLInputElement>(null)
     const clientsRef = useRef<HTMLSpanElement>(null)
+    const messagesRef = useRef<HTMLDivElement>(null);
 
     const [messages, setMessages] = useState<any>([])
-    
-    const [username, setUsername] = useState<string | null>(new URLSearchParams(window.location.search).get('u'))
-    const [roomID, setRoomID] = useState<string | null>(new URLSearchParams(window.location.search).get('r'))
+
+    const [username, setUsername] = useState<string | null>(null) // new URLSearchParams(window.location.search).get('u')
+    const [roomID, setRoomID] = useState<string | null>(null) // new URLSearchParams(window.location.search).get('r')
     const wsRef = useRef<WebSocket | null>(null);
 
     function submitChatInput(e: any) {
@@ -19,6 +19,9 @@ export default function Page() {
 
         const content = chatInputRef.current!.value
         chatInputRef.current!.value = ""
+
+        if (!content)
+            return
 
         const ws = wsRef.current
 
@@ -35,7 +38,7 @@ export default function Page() {
         }))
     }
 
-    function wsHandler() {
+    function wsHandler(username: string, roomID: string) {
         const ws = new WebSocket(location.protocol.replace("http", "ws") + '//' + window.location.host + '/ws/chat')
         wsRef.current = ws
 
@@ -54,31 +57,29 @@ export default function Page() {
 
             if (message.event === "new_message") {
                 setMessages((prev: any) => [...prev, {
-                    username: message.data.username, 
-                    content: message.data.content, 
+                    user: message.data.user,
+                    content: message.data.content,
                     is_me: message.data.is_me,
                     sender: "client"
                 }])
             } else if (message.event === "client_joined") {
                 setMessages((prev: any) => [...prev, {
-                    username: message.data.username, 
-                    content: "User " + message.data.username + " joined the room",
+                    user: message.data.user,
+                    content: "User " + message.data.user.username + " joined the room",
                     sender: "system",
                     error: false
                 }])
                 clientsRef.current!.textContent = message.data.total
             } else if (message.event === "client_left") {
                 setMessages((prev: any) => [...prev, {
-                    username: message.data.username, 
-                    content: "User " + message.data.username + " left the room",
+                    content: "User " + message.data.user.username + " left the room",
                     sender: "system",
                     error: false
                 }])
                 clientsRef.current!.textContent = message.data.total
             } else if (message.event === "error") {
                 setMessages((prev: any) => [...prev, {
-                    username: "system", 
-                    content: message.data.error, 
+                    content: message.data.error,
                     sender: "system",
                     error: true
                 }])
@@ -87,7 +88,13 @@ export default function Page() {
     }
 
     useEffect(() => {
-        wsHandler()
+        var username = new URLSearchParams(window.location.search).get('u')
+        setUsername(username)
+        var roomID = new URLSearchParams(window.location.search).get('r')
+        setRoomID(roomID)
+
+        if (username && roomID)
+            wsHandler(username, roomID)
 
         return () => {
             const ws = wsRef.current
@@ -95,6 +102,13 @@ export default function Page() {
                 ws.close();
         };
     }, [])
+
+    useEffect(() => {
+        if (messagesRef.current) {
+            messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+        }
+    }, [messages]);
+
 
     if (!username || !roomID) {
         return <div>Invalid URL</div>
@@ -118,17 +132,17 @@ export default function Page() {
             </div>
         </div>
         <div className="messages-container">
-            <div id="messages">
+            <div id="messages" ref={messagesRef}>
                 {
-                    messages.map((message: any) => {
+                    messages.map((message: any, index: number) => {
                         return message.sender === "system" ?
-                            <div className="system-message-container">
+                            <div key={index} className="system-message-container">
                                 <span className={`content error-${message.error}`}>{message.content}</span>
                             </div>
                             :
-                            <div className="message-container">
+                            <div key={index} className="message-container">
                                 <div className={`message is-me-${message.is_me}`}>
-                                    <span className="username">{message.username}</span>
+                                    <span className="username">{message.user.username}</span>
                                     <span className="content">{message.content}</span>
                                 </div>
                             </div>

@@ -1,0 +1,8 @@
+.header {
+    padding-inline: 35%;
+    text-align: center;
+
+    span {
+        margin-bottom: 50px;
+    }
+}

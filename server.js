@@ -2,6 +2,7 @@ import { createServer } from 'http';
 import { parse } from 'url';
 import next from 'next';
 import { WebSocketServer } from 'ws';
+import crypto from 'crypto'
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -12,12 +13,20 @@ class Client {
         this.ws = ws;
         this.room = room;
         this.username = username;
+        this.id = crypto.randomBytes(20).toString("base64url")
 
         this.room.join(this);
     }
 
     send(data) {
         this.ws.send(JSON.stringify(data));
+    }
+
+    to_json() {
+        return {
+            id: this.id,
+            username: this.username,
+        };
     }
 }
 
@@ -41,7 +50,7 @@ class Room {
         this.broadcastAll({
             event: 'client_joined',
             data: {
-                username: client.username,
+                user: client.to_json(),
                 total: this.clients.length,
             },
         });
@@ -52,7 +61,7 @@ class Room {
         this.broadcastAll({
             event: 'client_left',
             data: {
-                username: client.username,
+                user: client.to_json(),
                 total: this.clients.length,
             },
         });
@@ -118,14 +127,19 @@ class WsHandler {
         }
 
         this.client = new Client(this.ws, room, message.data.username);
-        this.client.send({ event: 'joined' });
+        this.client.send({ 
+            event: 'joined',
+            data: {
+                user: this.client.to_json()
+            }
+        });
     }
 
     message(message) {
         this.client.room.broadcast(this.client, {
             event: 'new_message',
             data: {
-                username: this.client.username,
+                user: this.client.to_json(),
                 content: message.data.content,
                 is_me: false,
             },
@@ -134,7 +148,7 @@ class WsHandler {
         this.client.send({
             event: 'new_message',
             data: {
-                username: this.client.username,
+                user: this.client.to_json(),
                 content: message.data.content,
                 is_me: true,
             },
