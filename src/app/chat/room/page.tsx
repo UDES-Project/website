@@ -1,7 +1,33 @@
 "use client";
 
+import { redirect } from "next/navigation";
 import "./page.scss";
-import { use, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+
+function AskUsername({ roomID }: { roomID: string }) {
+
+    const usernameRef = useRef<HTMLInputElement>(null)
+
+    function submitCreateChatForm(e: any) {
+        e.preventDefault()
+
+        const username = usernameRef.current!.value
+
+        location.href = `/chat/room?r=${roomID}&u=${username}`
+    }
+
+    return <div className="content-block">
+        <div className="content">
+            <form className="chat-form" onSubmit={submitCreateChatForm}>
+                <div className="input-wrapper">
+                    <img src="/static/assets/icons/username.png" alt="" />
+                    <input id="input-username" type="text" placeholder="Username" ref={usernameRef} />
+                </div>
+                <button className="button green">Join</button>
+            </form>
+        </div>
+    </div>
+}
 
 export default function Page() {
     const chatInputRef = useRef<HTMLInputElement>(null)
@@ -13,6 +39,23 @@ export default function Page() {
     const [username, setUsername] = useState<string | null>(null) // new URLSearchParams(window.location.search).get('u')
     const [roomID, setRoomID] = useState<string | null>(null) // new URLSearchParams(window.location.search).get('r')
     const wsRef = useRef<WebSocket | null>(null);
+
+    const sharePopupRef = useRef<HTMLDialogElement>(null);
+    const [copyDone, setCopyDone] = useState(false);
+
+    function openSharePopup() {
+        sharePopupRef.current!.showModal()
+    }
+
+    function copyRoomLink() {
+        setCopyDone(true)
+
+        navigator.clipboard.writeText(location.origin + location.pathname + `?r=${roomID}`)
+
+        setTimeout(() => {
+            setCopyDone(false)
+        }, 2000)
+    }
 
     function submitChatInput(e: any) {
         e.preventDefault()
@@ -89,9 +132,9 @@ export default function Page() {
 
     useEffect(() => {
         var username = new URLSearchParams(window.location.search).get('u')
-        setUsername(username)
+        setUsername(username || "@unknown")
         var roomID = new URLSearchParams(window.location.search).get('r')
-        setRoomID(roomID)
+        setRoomID(roomID || "@unknown")
 
         if (username && roomID)
             wsHandler(username, roomID)
@@ -109,9 +152,12 @@ export default function Page() {
         }
     }, [messages]);
 
+    if (roomID == "@unknown") {
+        return redirect("/chat")
+    }
 
-    if (!username || !roomID) {
-        return <div>Invalid URL</div>
+    if (username == "@unknown") {
+        return <AskUsername roomID={roomID!} />
     }
 
     return <div className="content-block full chat">
@@ -129,6 +175,11 @@ export default function Page() {
             <div className="info">
                 <img src="/static/assets/icons/members.png" alt="" />
                 <span id="span-clients" ref={clientsRef}>0</span>
+            </div>
+            <div className="sep"></div>
+            <div onClick={openSharePopup} className="share info">
+                <img src="/static/assets/icons/share.png" alt="" />
+                <span>Share</span>
             </div>
         </div>
         <div className="messages-container">
@@ -153,5 +204,20 @@ export default function Page() {
                 <input id="input-content" type="text" ref={chatInputRef} />
             </form>
         </div>
+        <dialog className="share-popup" ref={sharePopupRef}>
+            <div className="content">
+                <h1>Share</h1>
+                <span>Room ID</span>
+                { roomID ? <input className="input" type="text" value={roomID} readOnly /> : undefined }
+                <span>Room Link</span>
+                <div className="input-wrapper">
+                    <input type="text" value={location.origin + location.pathname + `?r=${roomID}`} readOnly/>
+                    <button onClick={copyRoomLink}><img src={`/static/assets/icons/${copyDone ? "done.png" : "copy.png"}`} alt=""/></button>
+                </div>
+                <form method="dialog">
+                    <button className="button green">OK</button>
+                </form>
+            </div>
+        </dialog>
     </div>
 }
