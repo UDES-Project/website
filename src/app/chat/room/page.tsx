@@ -13,7 +13,7 @@ function AskUsername({ roomID }: { roomID: string }) {
 
         const username = usernameRef.current!.value
 
-        location.href = `/chat/room?r=${roomID}&u=${username}`
+        window.location.href = `/chat/room?r=${roomID}&u=${username}`
     }
 
     return <div className="content-block">
@@ -50,7 +50,7 @@ export default function Page() {
     function copyRoomLink() {
         setCopyDone(true)
 
-        navigator.clipboard.writeText(location.origin + location.pathname + `?r=${roomID}`)
+        navigator.clipboard.writeText(window.location.origin + window.location.pathname + `?r=${roomID}`)
 
         setTimeout(() => {
             setCopyDone(false)
@@ -82,7 +82,7 @@ export default function Page() {
     }
 
     function wsHandler(username: string, roomID: string) {
-        const ws = new WebSocket(location.protocol.replace("http", "ws") + '//' + window.location.host + '/ws/chat')
+        const ws = new WebSocket(window.location.protocol.replace("http", "ws") + '//' + window.location.host + '/ws/chat')
         wsRef.current = ws
 
         ws.onopen = () => {
@@ -211,7 +211,7 @@ export default function Page() {
                 { roomID ? <input className="input" type="text" value={roomID} readOnly /> : undefined }
                 <span>Room Link</span>
                 <div className="input-wrapper">
-                    <input type="text" value={location.origin + location.pathname + `?r=${roomID}`} readOnly/>
+                    <input type="text" value={window.location.origin + window.location.pathname + `?r=${roomID}`} readOnly/>
                     <button onClick={copyRoomLink}><img src={`/static/assets/icons/${copyDone ? "done.png" : "copy.png"}`} alt=""/></button>
                 </div>
                 <form method="dialog">
