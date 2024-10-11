@@ -43,8 +43,8 @@ export default function Page() {
     const sharePopupRef = useRef<HTMLDialogElement>(null);
     const [copyDone, setCopyDone] = useState(false);
 
-    if (!window) {
-        return <div></div>
+    if (typeof window === "undefined") {
+        return <></>
     }
 
     function openSharePopup() {
