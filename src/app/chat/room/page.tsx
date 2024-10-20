@@ -45,10 +45,6 @@ export default function Page() {
 
     const [roomLink, setRoomLink] = useState("");
 
-    // if (typeof window === "undefined") {
-    //     return <></>
-    // }
-
     function openSharePopup() {
         sharePopupRef.current!.showModal()
     }
