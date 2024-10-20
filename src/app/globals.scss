@@ -32,6 +32,10 @@ main {
     gap: 10px;
     align-items: center;
 
+    @media (max-width: 600px) {
+        padding-inline: 20px;
+    }
+
     &.full {
         padding: 0;
         width: 100%;
@@ -60,6 +64,10 @@ main {
     display: flex;
     flex-direction: row;
     gap: 50px;
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+    }
 
     .block {
         display: flex;

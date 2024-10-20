@@ -43,9 +43,11 @@ export default function Page() {
     const sharePopupRef = useRef<HTMLDialogElement>(null);
     const [copyDone, setCopyDone] = useState(false);
 
-    if (typeof window === "undefined") {
-        return <></>
-    }
+    const [roomLink, setRoomLink] = useState("");
+
+    // if (typeof window === "undefined") {
+    //     return <></>
+    // }
 
     function openSharePopup() {
         sharePopupRef.current!.showModal()
@@ -140,6 +142,8 @@ export default function Page() {
         var roomID = new URLSearchParams(window.location.search).get('r')
         setRoomID(roomID || "@unknown")
 
+        setRoomLink(window.location.origin + window.location.pathname + `?r=${roomID}`)
+
         if (username && roomID)
             wsHandler(username, roomID)
 
@@ -215,7 +219,7 @@ export default function Page() {
                 { roomID ? <input className="input" type="text" value={roomID} readOnly /> : undefined }
                 <span>Room Link</span>
                 <div className="input-wrapper">
-                    <input type="text" value={window.location.origin + window.location.pathname + `?r=${roomID}`} readOnly/>
+                    <input type="text" value={roomLink} readOnly/>
                     <button onClick={copyRoomLink}><img src={`/static/assets/icons/${copyDone ? "done.png" : "copy.png"}`} alt=""/></button>
                 </div>
                 <form method="dialog">

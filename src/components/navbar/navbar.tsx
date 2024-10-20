@@ -9,7 +9,6 @@ export default function NavBar() {
                 </a>
             </div>
             <div className="block">
-                <a href="/">Home</a>
                 <a href="/chat">Chat</a>
                 <a className="button" href="/extensions">Download</a>
             </div>

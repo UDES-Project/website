@@ -19,6 +19,10 @@ nav {
             align-items: center;
             margin-inline: 60px;
 
+            @media (max-width: 600px) {
+                margin-inline: 20px;
+            }
+
             img {
                 height: 50px;
             }
