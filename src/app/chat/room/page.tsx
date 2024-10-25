@@ -2,13 +2,23 @@
 
 import { redirect } from "next/navigation";
 import "./page.scss";
-import { useEffect, useRef, useState } from "react"
+import { FormEvent, useEffect, useRef, useState } from "react"
+
+interface Message {
+    content: string
+    sender: string
+    user?: {
+        username: string
+    }
+    is_me?: boolean
+    error?: boolean
+}
 
 function AskUsername({ roomID }: { roomID: string }) {
 
     const usernameRef = useRef<HTMLInputElement>(null)
 
-    function submitCreateChatForm(e: any) {
+    function submitCreateChatForm(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
         const username = usernameRef.current!.value
@@ -34,7 +44,7 @@ export default function Page() {
     const clientsRef = useRef<HTMLSpanElement>(null)
     const messagesRef = useRef<HTMLDivElement>(null);
 
-    const [messages, setMessages] = useState<any>([])
+    const [messages, setMessages] = useState<Message[]>([])
 
     const [username, setUsername] = useState<string | null>(null) // new URLSearchParams(window.location.search).get('u')
     const [roomID, setRoomID] = useState<string | null>(null) // new URLSearchParams(window.location.search).get('r')
@@ -59,7 +69,7 @@ export default function Page() {
         }, 2000)
     }
 
-    function submitChatInput(e: any) {
+    function submitChatInput(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
         const content = chatInputRef.current!.value
@@ -101,14 +111,14 @@ export default function Page() {
             const message = JSON.parse(e.data)
 
             if (message.event === "new_message") {
-                setMessages((prev: any) => [...prev, {
+                setMessages((prev: Message[]) => [...prev, {
                     user: message.data.user,
                     content: message.data.content,
                     is_me: message.data.is_me,
                     sender: "client"
                 }])
             } else if (message.event === "client_joined") {
-                setMessages((prev: any) => [...prev, {
+                setMessages((prev: Message[]) => [...prev, {
                     user: message.data.user,
                     content: "User " + message.data.user.username + " joined the room",
                     sender: "system",
@@ -116,14 +126,14 @@ export default function Page() {
                 }])
                 clientsRef.current!.textContent = message.data.total
             } else if (message.event === "client_left") {
-                setMessages((prev: any) => [...prev, {
+                setMessages((prev: Message[]) => [...prev, {
                     content: "User " + message.data.user.username + " left the room",
                     sender: "system",
                     error: false
                 }])
                 clientsRef.current!.textContent = message.data.total
             } else if (message.event === "error") {
-                setMessages((prev: any) => [...prev, {
+                setMessages((prev: Message[]) => [...prev, {
                     content: message.data.error,
                     sender: "system",
                     error: true
@@ -133,9 +143,9 @@ export default function Page() {
     }
 
     useEffect(() => {
-        var username = new URLSearchParams(window.location.search).get('u')
+        const username = new URLSearchParams(window.location.search).get('u')
         setUsername(username || "@unknown")
-        var roomID = new URLSearchParams(window.location.search).get('r')
+        const roomID = new URLSearchParams(window.location.search).get('r')
         setRoomID(roomID || "@unknown")
 
         setRoomLink(window.location.origin + window.location.pathname + `?r=${roomID}`)
@@ -189,7 +199,7 @@ export default function Page() {
         <div className="messages-container">
             <div id="messages" ref={messagesRef}>
                 {
-                    messages.map((message: any, index: number) => {
+                    messages.map((message: Message, index: number) => {
                         return message.sender === "system" ?
                             <div key={index} className="system-message-container">
                                 <span className={`content error-${message.error}`}>{message.content}</span>
@@ -197,7 +207,7 @@ export default function Page() {
                             :
                             <div key={index} className="message-container">
                                 <div className={`message is-me-${message.is_me}`}>
-                                    <span className="username">{message.user.username}</span>
+                                    <span className="username">{message.user!.username}</span>
                                     <span className="content">{message.content}</span>
                                 </div>
                             </div>

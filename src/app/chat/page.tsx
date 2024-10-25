@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react"
+import { FormEvent, useRef } from "react"
 import { randomBytes } from "crypto";
 import "./page.scss"
 
@@ -9,7 +9,7 @@ export default function Page() {
     const roomIdRef = useRef<HTMLInputElement>(null);
     const usernameRef = useRef<HTMLInputElement>(null);
 
-    const submitJoinChatForm = (e: any) => {
+    const submitJoinChatForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         const roomID = roomIdRef.current!.value
@@ -18,17 +18,17 @@ export default function Page() {
     }
 
     function randomRoomID() {
-        var rb = randomBytes(16);
-        var encodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        var r = "";
-        for (var i = 0; i < rb.length; i++) {
-            let j = rb[i] % encodeChars.length;
+        const rb = randomBytes(16);
+        const encodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        let r = "";
+        for (let i = 0; i < rb.length; i++) {
+            const j = rb[i] % encodeChars.length;
             r = r+encodeChars[j];
         }
         return r;
     }
 
-    const submitCreateChatForm = (e: any) => {
+    const submitCreateChatForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         const roomID = randomRoomID()
@@ -42,7 +42,7 @@ export default function Page() {
         <div className="content-block">
             <div className="content">
                 <form className="chat-form" onSubmit={submitJoinChatForm}>
-                    <span>Someone has sent you a Room ID. Enter it in the field below and click on "Join a Room".</span>
+                    <span>Someone has sent you a Room ID. Enter it in the field below and click on &quot;Join a Room&quot;.</span>
                     <div className="input-wrapper">
                         <img src="/static/assets/icons/room.png" alt=""/>
                         <input id="input-room_id" type="text" placeholder="Room ID" ref={roomIdRef}/>
@@ -51,7 +51,7 @@ export default function Page() {
                 </form>
                 <div className="sep"></div>
                 <form className="chat-form" onSubmit={submitCreateChatForm}>
-                    <span>To create a new room and chat with anyone, enter your username and press "Create a room".</span>
+                    <span>To create a new room and chat with anyone, enter your username and press &quot;Create a room&quot;.</span>
                     <div className="input-wrapper">
                         <img src="/static/assets/icons/username.png" alt=""/>
                         <input id="input-username" type="text" placeholder="Username" ref={usernameRef}/>
