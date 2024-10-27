@@ -151,7 +151,7 @@ export default function Page() {
         setRoomLink(window.location.origin + window.location.pathname + `?r=${roomID}`)
 
         setTimeout(() => {
-            let warning = document.getElementById("udes-warning")
+            const warning = document.getElementById("udes-warning")
             if (warning) {
                 warning.style.display = "flex"
             }
