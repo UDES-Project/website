@@ -4,8 +4,7 @@ import next from 'next';
 import { WebSocketServer } from 'ws';
 import crypto from 'crypto'
 
-// const dev = process.env.NODE_ENV !== 'production';
-const dev = false
+const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 

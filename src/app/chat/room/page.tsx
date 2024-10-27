@@ -150,6 +150,13 @@ export default function Page() {
 
         setRoomLink(window.location.origin + window.location.pathname + `?r=${roomID}`)
 
+        setTimeout(() => {
+            let warning = document.getElementById("udes-warning")
+            if (warning) {
+                warning.style.display = "flex"
+            }
+        }, 1000)
+
         if (username && roomID)
             wsHandler(username, roomID)
 
@@ -233,5 +240,13 @@ export default function Page() {
                 </form>
             </div>
         </dialog>
+        <div className="warning" id="udes-warning" style={{ display: "none" }}>
+            <button className="close" onClick={() => { document.getElementById("udes-warning")!.style.display = "none" }}>
+                <img src="/static/assets/icons/close.png" alt="" />
+            </button>
+            <h1>Warning</h1>
+            <span>You are not using the UDES extension ! Your messages will be in plain sight, so we recommend that you use it to encrypt your messages.</span>
+            <a href="https://github.com/UDES-Project/extension">Install the extension</a>
+        </div>
     </div>
 }
