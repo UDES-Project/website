@@ -181,7 +181,7 @@ export default function Page() {
         return <AskUsername roomID={roomID!} />
     }
 
-    return <div className="content-block full chat">
+    return <div className="content-block full chat flex-body">
         <div className="nav">
             <div className="info">
                 <img src="/static/assets/icons/room.png" alt="" />

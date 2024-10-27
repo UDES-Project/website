@@ -17,6 +17,11 @@ html {
     background-color: #fff;
 }
 
+body:has(.flex-body) {
+    display: flex;
+    flex-direction: column; /* Optional: adjust as needed */
+}
+
 main {
     min-height: 100vh;
 }
