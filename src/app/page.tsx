@@ -12,7 +12,7 @@ export default function Home() {
             </div>
             <div className="content-block">
                 <h2>How it Works</h2>
-                <span>Ea nisi nulla sit ipsum do dolor. Culpa excepteur ipsum tempor laboris deserunt mollit nisi. Reprehenderit dolore in aliquip exercitation enim ea deserunt aliquip. Cupidatat et nulla sint ullamco et. Duis veniam proident deserunt culpa excepteur do commodo qui pariatur commodo nostrud mollit. Minim sit nisi nulla veniam.</span>
+                <span>UDES fonctionne avec des plateformes de messagerie en ligne comme WhatsApp Web, Discord, et autres, directement via votre navigateur web, pour garantir la sécurité de vos communications. Voici comment le système opère : </span>
             </div>
             <div className="content-block specification">
                 <div className="block">
