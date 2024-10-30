@@ -12,17 +12,37 @@ export default function Home() {
             </div>
             <div className="content-block">
                 <h2>How it Works</h2>
-                <span>UDES is a system that makes your messages more secure and works in two ways:
-• With its own chat: You can use the UDES chat provided for you.
-• With applications like WhatsApp Web or Discord: This requires Firefox and the installation of the UDES extension.
+                <span><p><strong>UDES</strong> makes your messages more secure and works in two ways:</p><br />
 
-To make it work, both you and the person you're messaging need to install UDES. Here's how to proceed:
+<p><strong>1. Using its own chat:</strong><br />
+Access a secure chat provided by UDES to communicate with full confidentiality.</p><br />
 
-Install the UDES extension: Before starting, both of you need to download and install the UDES extension on Firefox.
-Normal connection and extension activation: Log in to your usual messaging app, making sure the UDES extension is activated on Firefox.
-Automatic protection: Once connected, UDES encrypts your messages to secure them. Everything happens in the background, so you don’t need to do anything.
-Message visibility: Messages exchanged are automatically encrypted. Only people who have installed and activated the UDES extension can decrypt them. Others, even if they access the conversation, will not be able to read the messages without the extension and UDES’s secure servers. This way, as long as both participants are using UDES, their exchanges remain strictly private.
-In summary: UDES keeps your conversations private. As long as both of you have UDES installed, your exchanges are automatically protected and remain invisible to others.</span>
+<p><strong>2. With applications like WhatsApp Web or Discord:</strong><br />
+This requires Firefox and the installation of the UDES extension to ensure message protection.</p><br />
+
+<hr />
+
+<p>To ensure security, both you and your contact need to install UDES. Here are the steps:</p><br />
+
+<ul>
+    <li><strong>Install the UDES extension:</strong><br />
+        Download and install the UDES extension on Firefox for both you and your contact.</li><br />
+
+    <li><strong>Connection and extension activation:</strong><br />
+        Log in to your usual messaging app with the UDES extension activated on Firefox.</li><br />
+
+    <li><strong>Automatic protection:</strong><br />
+        Once connected, UDES encrypts your messages in the background. No further action is required.</li><br />
+
+    <li><strong>Message visibility:</strong><br />
+        Messages are encrypted and visible only to those who have installed UDES. Without the extension, even if someone accesses the conversation, the messages will remain unreadable.</li>
+</ul><br />
+
+<hr />
+
+<p><strong>In summary:</strong><br />
+UDES keeps your conversations private. As long as both you and your contact use UDES, your exchanges are automatically secured and invisible to others.</p>
+</span>
             </div>
             <div className="content-block specification">
                 <div className="block">
