@@ -4,7 +4,7 @@ export default function Home() {
     return (
         <>
             <div className="content-block header">
-                <h1>Welcome to UDES - Universal Decentralized Encryption System</h1>
+                <h1>Universal Decentralized Encryption System <br />- UDES - </h1>
                 <span>UDES offers a solution to secure your communications directly from your web browser, ensuring confidentiality, integrity, and authenticity in your exchanges. Protect your instant messages with our end-to-end encryption. Download now for maximum security.</span>
                 <div>
                     <a className="button green" href="/extensions">Download</a>
