@@ -48,17 +48,17 @@ UDES keeps your conversations private. As long as both you and your contact use 
                 <div className="block">
                     <img src="/static/assets/icons/privacy.png" alt="" />
                     <h3>Privacy</h3>
-                    <span>Enim laboris id incididunt ullamco occaecat qui.</span>
+                    <span>Protect your conversations with advanced encryption that ensures the confidentiality of your exchanges. With UDES, only you and your contact have access to your messages, safeguarding your information from any potential breaches.</span>
                 </div>
                 <div className="block">
                     <img src="/static/assets/icons/global.png" alt="" />
                     <h3>Universality</h3>
-                    <span>Enim laboris id incididunt ullamco occaecat qui.</span>
+                    <span>Communicate securely across multiple platforms. UDES adapts to popular messaging applications to provide seamless protection, no matter which communication tool you use.</span>
                 </div>
                 <div className="block">
                     <img src="/static/assets/icons/community.png" alt="" />
                     <h3>Community</h3>
-                    <span>Enim laboris id incididunt ullamco occaecat qui.</span>
+                    <span>Join a community committed to secure and private exchanges. UDES connects users who share the same values, creating a trusted and secure network.</span>
                 </div>
             </div>
         </>
