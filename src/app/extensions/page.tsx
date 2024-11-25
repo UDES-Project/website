@@ -1,41 +1,27 @@
 import "./page.scss"
 
+function Extension({ name, description, link, main }: { name: string, description: string, link: string, main?: boolean }) {
+    return <div className={`extension ${main ? "main" : ""}`}>
+        <div className="name">
+            <img src="/static/assets/icons/privacy.png" alt="" />
+            {name}
+            <span className="description">
+                {description}
+            </span>
+        </div>
+        <div>
+            <a target="_blank" href={link} className="button green">Download</a>
+        </div>
+    </div>
+}
+
 export default function Page() {
     return <>
         <div className="content-block">
-        <h2>Official List</h2>
-        <div className="extensions">
-            <div className="extension main">
-                <div className="name">
-                    <img src="/static/assets/icons/privacy.png" alt=""/>
-                    UDES Extension
-                    <span className="description">
-                        Secure the official UDES Chat and manage other extensions
-                    </span>
-                </div>
-                <div>
-                    <a href="#" className="button green">Download</a>
-                </div>
-            </div>
-            <div className="extension">
-                <div className="name">
-                    <img src="/static/assets/icons/privacy.png" alt=""/>
-                    Test
-                </div>
-                <div>
-                    <a href="#" className="button green">Download</a>
-                </div>
-            </div>
-            <div className="extension">
-                <div className="name">
-                    <img src="/static/assets/icons/privacy.png" alt=""/>
-                    Test
-                </div>
-                <div>
-                    <a href="#" className="button green">Download</a>
-                </div>
+            <h2>Official List</h2>
+            <div className="extensions">
+                <Extension name="UDES Extension" description="Secure the official UDES Chat and manage other extensions" link="https://addons.mozilla.org/en-US/firefox/addon/udes-extension/" main />
             </div>
         </div>
-    </div>
-</>
+    </>
 }
