@@ -10,3 +10,11 @@
         margin-bottom: 50px;
     }
 }
+
+.hiw-content {
+    padding-inline: 20%;
+
+    @media (max-width: 600px) {
+        padding-inline: 20px;
+    }      
+}
