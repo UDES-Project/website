@@ -31,5 +31,22 @@
                 margin-left: 10px;
             }
         }
+
+        .button {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            flex-direction: column;
+            gap: 20px;
+
+            .name {
+                flex-direction: column;
+            }
+
+            .description {
+                text-align: center;
+            }
+        }
     }
 }
