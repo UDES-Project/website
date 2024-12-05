@@ -1,9 +1,33 @@
 .footer {
-    padding: 40px;
-    
+    padding: 75px;
+    padding-inline: 100px;
     background-color: #2c6e49;
+    display: flex;
+    gap: 100px;
 
     a {
         color: #fff;
+    }
+
+    .column {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        h2 {
+            margin-bottom: 20px;
+            color: #fff;
+            position: relative;
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: -5px;
+                left: 0px;
+                height: 1px;
+                background-color: #fff;
+                width: 50%;;
+            }
+        }
     }
 }
