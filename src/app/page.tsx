@@ -11,7 +11,7 @@ export default function Home() {
                 </div>
             </div>
             <div className="content-block">
-                <h2>How it Works</h2>
+                <h2>How it Work</h2>
                 <div className="hiw-content">
                     <p><strong>UDES</strong> makes your messages more secure and works in two ways:</p><br />
 
