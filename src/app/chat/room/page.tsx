@@ -96,6 +96,7 @@ export default function Page() {
     function wsHandler(username: string, roomID: string) {
         const ws = new WebSocket(window.location.protocol.replace("http", "ws") + '//' + window.location.host + '/ws/chat')
         wsRef.current = ws
+        var joinSent = false
 
         ws.onopen = () => {
             ws!.send(JSON.stringify({
@@ -105,6 +106,18 @@ export default function Page() {
                     "room_id": roomID
                 }
             }))
+            joinSent = true
+        }
+
+        ws.onclose = () => {
+            if (!joinSent) return
+            wsRef.current = null
+            setMessages((prev: Message[]) => [...prev, {
+                user: { username: "system" },
+                content: "Connection closed",
+                sender: "system",
+                error: true
+            }])
         }
 
         ws.onmessage = (e) => {
