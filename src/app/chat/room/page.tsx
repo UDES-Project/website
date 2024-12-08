@@ -138,6 +138,10 @@ export default function Page() {
                     sender: "system",
                     error: true
                 }])
+            } else if (message.event === "heartbeat") {
+                ws.send(JSON.stringify({
+                    "event": "heartbeat"
+                }))
             }
         }
     }

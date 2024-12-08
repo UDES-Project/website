@@ -164,6 +164,18 @@ app.prepare().then(() => {
 
     const wss = new WebSocketServer({ noServer: true });
 
+    const heartbeat = () => {
+        Object.values(Room.ROOMS).forEach((room) => {
+            room.clients.forEach((client) => {
+                client.send({
+                    event: 'heartbeat',
+                });
+            })
+        })
+    };
+
+    setInterval(heartbeat, 15000);
+
     server.on('upgrade', (request, socket, head) => {
         wss.handleUpgrade(request, socket, head, (ws) => {
             const wsHandler = new WsHandler(ws);
