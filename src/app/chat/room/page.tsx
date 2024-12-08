@@ -96,7 +96,7 @@ export default function Page() {
     function wsHandler(username: string, roomID: string) {
         const ws = new WebSocket(window.location.protocol.replace("http", "ws") + '//' + window.location.host + '/ws/chat')
         wsRef.current = ws
-        var joinSent = false
+        let joinSent = false
 
         ws.onopen = () => {
             ws!.send(JSON.stringify({
